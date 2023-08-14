@@ -22,18 +22,32 @@ namespace PassaparolaOyunProje
 
         private void btnKaydol_Click(object sender, EventArgs e)
         {
-            if(txtSifre.Text==txtSifre2.Text)
+            try
             {
-                SqlCommand cmd = new SqlCommand("insert into TblYarismaci (ad,sifre) values (@p1,@p2)", bgl.baglanti());
-                cmd.Parameters.AddWithValue("@p1", txtAd.Text);
-                cmd.Parameters.AddWithValue("@p2", txtSifre.Text);
-                cmd.ExecuteNonQuery();
-                bgl.baglanti().Close();
-                MessageBox.Show("Hesabınız oluşturuldu", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (txtAd.Text == "" || txtSifre.Text == "" || txtSifre2.Text == "")
+                {
+                    MessageBox.Show("Girdiğiniz değerler geçersiz, lütfen farklı değerler giriniz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    if (txtSifre.Text == txtSifre2.Text)
+                    {
+                        SqlCommand cmd = new SqlCommand("insert into TblYarismaci (ad,sifre) values (@p1,@p2)", bgl.baglanti());
+                        cmd.Parameters.AddWithValue("@p1", txtAd.Text);
+                        cmd.Parameters.AddWithValue("@p2", txtSifre.Text);
+                        cmd.ExecuteNonQuery();
+                        bgl.baglanti().Close();
+                        MessageBox.Show("Hesabınız oluşturuldu", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Girdiğiniz şifre değerleri aynı değil, lütfen farklı bir değer giriniz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Girdiğiniz şifre değerleri aynı değil, lütfen farklı bir değer giriniz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Girdiğiniz değerler geçersiz, lütfen farklı değerler giriniz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

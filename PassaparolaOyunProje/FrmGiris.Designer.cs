@@ -51,7 +51,7 @@
             // linkKaydol
             // 
             this.linkKaydol.AutoSize = true;
-            this.linkKaydol.Location = new System.Drawing.Point(218, 379);
+            this.linkKaydol.Location = new System.Drawing.Point(220, 377);
             this.linkKaydol.Name = "linkKaydol";
             this.linkKaydol.Size = new System.Drawing.Size(355, 29);
             this.linkKaydol.TabIndex = 4;
@@ -95,7 +95,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(171, 226);
+            this.label6.Location = new System.Drawing.Point(171, 220);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 29);
             this.label6.TabIndex = 15;

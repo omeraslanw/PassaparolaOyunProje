@@ -24,6 +24,7 @@ namespace PassaparolaOyunProje
         int soruno = 0, dogru = 0, yanlis = 0, bos = 0, sayac = 15;
         public string yarismaci;
 
+
         public void sorunoArtir()
         {
             soruno++;
@@ -87,14 +88,21 @@ namespace PassaparolaOyunProje
 
         private void btnDerece_Click(object sender, EventArgs e)
         {
-            SqlCommand komut = new SqlCommand("insert into TblDereceler (dogru,yanlis,bos,yarismaciId) values (@p1,@p2,@p3,p4)", bgl.baglanti());
-            komut.Parameters.AddWithValue("@p1", dogru);
-            komut.Parameters.AddWithValue("@p2", yanlis);
-            komut.Parameters.AddWithValue("@p3", bos);
-            komut.Parameters.AddWithValue("@p4", lblId.Text);
-            komut.ExecuteNonQuery();
-            bgl.baglanti().Close();
-            MessageBox.Show("Skorunuz sıralama tablosuna eklendi", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                SqlCommand komut = new SqlCommand("insert into TblDereceler (dogru,yanlis,bos,yarismaciId) values (@p1,@p2,@p3,@p4)", bgl.baglanti());
+                komut.Parameters.AddWithValue("@p1", dogru);
+                komut.Parameters.AddWithValue("@p2", yanlis);
+                komut.Parameters.AddWithValue("@p3", bos);
+                komut.Parameters.AddWithValue("@p4", lblId.Text);
+                komut.ExecuteNonQuery();
+                bgl.baglanti().Close();
+                MessageBox.Show("Skorunuz sıralama tablosuna eklendi", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Dereceyi tabloya ekleme sırasında hata oluştu!", "Hata!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -104,48 +112,64 @@ namespace PassaparolaOyunProje
 
         private void btnYeniden_Click(object sender, EventArgs e)
         {
-            bos = 0;
-            dogru = 0;
-            yanlis = 0;
-            soruno = 0;
-            sayac = 15;
-            lblBos.Text = bos.ToString();
-            lblDogru.Text = dogru.ToString();
-            lblYanlis.Text = yanlis.ToString();
-            lblSoruNo.Text = soruno.ToString();
-            btnBasla.Enabled = true;
-            txtCevap.Enabled = false;
-            txtCevap.Text = "";
-            panelYeniden.Visible = false;
+            try
+            {
+                bos = 0;
+                dogru = 0;
+                yanlis = 0;
+                soruno = 0;
+                sayac = 15;
+                lblBos.Text = bos.ToString();
+                lblDogru.Text = dogru.ToString();
+                lblYanlis.Text = yanlis.ToString();
+                lblSoruNo.Text = soruno.ToString();
+                btnBasla.Enabled = true;
+                txtCevap.Enabled = false;
+                txtCevap.Text = "";
+                panelYeniden.Visible = false;
 
-            btnA.BackColor = Color.LightCoral;
-            btnB.BackColor = Color.LightCoral;
-            btnC.BackColor = Color.LightCoral;
-            btnD.BackColor = Color.LightCoral;
-            btnE.BackColor = Color.LightCoral;
-            btnF.BackColor = Color.LightCoral;
-            btnG.BackColor = Color.LightCoral;
-            btnH.BackColor = Color.LightCoral;
-            btnI.BackColor = Color.LightCoral;
-            btnİ.BackColor = Color.LightCoral;
-            btnJ.BackColor = Color.LightCoral;
-            btnK.BackColor = Color.LightCoral;
-            btnL.BackColor = Color.LightCoral;
-            btnM.BackColor = Color.LightCoral;
-            btnN.BackColor = Color.LightCoral;
-            btnO.BackColor = Color.LightCoral;
-            btnP.BackColor = Color.LightCoral;
-            btnR.BackColor = Color.LightCoral;
-            btnS.BackColor = Color.LightCoral;
-            btnT.BackColor = Color.LightCoral;
-            btnU.BackColor = Color.LightCoral;
-            btnV.BackColor = Color.LightCoral;
-            btnY.BackColor = Color.LightCoral;
-            btnZ.BackColor = Color.LightCoral;
+                btnA.BackColor = Color.LightCoral;
+                btnB.BackColor = Color.LightCoral;
+                btnC.BackColor = Color.LightCoral;
+                btnD.BackColor = Color.LightCoral;
+                btnE.BackColor = Color.LightCoral;
+                btnF.BackColor = Color.LightCoral;
+                btnG.BackColor = Color.LightCoral;
+                btnH.BackColor = Color.LightCoral;
+                btnI.BackColor = Color.LightCoral;
+                btnİ.BackColor = Color.LightCoral;
+                btnJ.BackColor = Color.LightCoral;
+                btnK.BackColor = Color.LightCoral;
+                btnL.BackColor = Color.LightCoral;
+                btnM.BackColor = Color.LightCoral;
+                btnN.BackColor = Color.LightCoral;
+                btnO.BackColor = Color.LightCoral;
+                btnP.BackColor = Color.LightCoral;
+                btnR.BackColor = Color.LightCoral;
+                btnS.BackColor = Color.LightCoral;
+                btnT.BackColor = Color.LightCoral;
+                btnU.BackColor = Color.LightCoral;
+                btnV.BackColor = Color.LightCoral;
+                btnY.BackColor = Color.LightCoral;
+                btnZ.BackColor = Color.LightCoral;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("İşlem sırasında beklenmedik bir hata oluştu!", "Hata!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+           
         }
 
         private void txtCevap_KeyDown(object sender, KeyEventArgs e)
         {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Lütfen geçerli bir değer giriniz!", "Hata!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             if (e.KeyCode == Keys.Enter)
             {
                 btnBasla.Enabled = true;
@@ -613,7 +637,6 @@ namespace PassaparolaOyunProje
                         break;
                 }
             }
-
         }
 
         private void btnBasla_Click(object sender, EventArgs e)
@@ -627,281 +650,290 @@ namespace PassaparolaOyunProje
             lblZamanlayici.Text = sayac.ToString();
             timer1.Start();
 
-            switch (soruno)
+            try
             {
-                case 1:
-                    btnA.BackColor = Color.Yellow;
-                    SqlCommand komut1 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut1.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr = komut1.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        btnSoru.Text = dr[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 2:
-                    btnB.BackColor = Color.Yellow;
-                    btnB.BackColor = Color.Yellow;
-                    SqlCommand komut2 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut2.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr2 = komut2.ExecuteReader();
-                    while (dr2.Read())
-                    {
-                        btnSoru.Text = dr2[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 3:
-                    btnC.BackColor = Color.Yellow;
-                    SqlCommand komut3 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut3.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr3 = komut3.ExecuteReader();
-                    while (dr3.Read())
-                    {
-                        btnSoru.Text = dr3[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 4:
-                    btnD.BackColor = Color.Yellow;
-                    SqlCommand komut4 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut4.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr4 = komut4.ExecuteReader();
-                    while (dr4.Read())
-                    {
-                        btnSoru.Text = dr4[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 5:
-                    btnE.BackColor = Color.Yellow;
-                    SqlCommand komut5 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut5.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr5 = komut5.ExecuteReader();
-                    while (dr5.Read())
-                    {
-                        btnSoru.Text = dr5[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 6:
-                    btnF.BackColor = Color.Yellow;
-                    SqlCommand komut6 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut6.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr6 = komut6.ExecuteReader();
-                    while (dr6.Read())
-                    {
-                        btnSoru.Text = dr6[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 7:
-                    btnG.BackColor = Color.Yellow;
-                    SqlCommand komut7 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut7.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr7 = komut7.ExecuteReader();
-                    while (dr7.Read())
-                    {
-                        btnSoru.Text = dr7[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 8:
-                    btnH.BackColor = Color.Yellow;
-                    SqlCommand komut8 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut8.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr8 = komut8.ExecuteReader();
-                    while (dr8.Read())
-                    {
-                        btnSoru.Text = dr8[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 9:
-                    btnI.BackColor = Color.Yellow;
-                    SqlCommand komut9 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut9.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr9 = komut9.ExecuteReader();
-                    while (dr9.Read())
-                    {
-                        btnSoru.Text = dr9[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 10:
-                    btnİ.BackColor = Color.Yellow;
-                    SqlCommand komut10 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut10.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr10 = komut10.ExecuteReader();
-                    while (dr10.Read())
-                    {
-                        btnSoru.Text = dr10[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 11:
-                    btnJ.BackColor = Color.Yellow;
-                    SqlCommand komut11 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut11.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr11 = komut11.ExecuteReader();
-                    while (dr11.Read())
-                    {
-                        btnSoru.Text = dr11[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 12:
-                    btnK.BackColor = Color.Yellow;
-                    SqlCommand komut12 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut12.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr12 = komut12.ExecuteReader();
-                    while (dr12.Read())
-                    {
-                        btnSoru.Text = dr12[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 13:
-                    btnL.BackColor = Color.Yellow;
-                    SqlCommand komut13 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut13.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr13 = komut13.ExecuteReader();
-                    while (dr13.Read())
-                    {
-                        btnSoru.Text = dr13[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 14:
-                    btnM.BackColor = Color.Yellow;
-                    SqlCommand komut14 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut14.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr14 = komut14.ExecuteReader();
-                    while (dr14.Read())
-                    {
-                        btnSoru.Text = dr14[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 15:
-                    btnN.BackColor = Color.Yellow;
-                    SqlCommand komut15 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut15.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr15 = komut15.ExecuteReader();
-                    while (dr15.Read())
-                    {
-                        btnSoru.Text = dr15[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 16:
-                    btnO.BackColor = Color.Yellow;
-                    SqlCommand komut16 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut16.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr16 = komut16.ExecuteReader();
-                    while (dr16.Read())
-                    {
-                        btnSoru.Text = dr16[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 17:
-                    btnP.BackColor = Color.Yellow;
-                    SqlCommand komut17 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut17.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr17 = komut17.ExecuteReader();
-                    while (dr17.Read())
-                    {
-                        btnSoru.Text = dr17[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 18:
-                    btnR.BackColor = Color.Yellow;
-                    SqlCommand komut18 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut18.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr18 = komut18.ExecuteReader();
-                    while (dr18.Read())
-                    {
-                        btnSoru.Text = dr18[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 19:
-                    btnS.BackColor = Color.Yellow;
-                    SqlCommand komut19 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut19.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr19 = komut19.ExecuteReader();
-                    while (dr19.Read())
-                    {
-                        btnSoru.Text = dr19[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 20:
-                    btnT.BackColor = Color.Yellow;
-                    SqlCommand komut20 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut20.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr20 = komut20.ExecuteReader();
-                    while (dr20.Read())
-                    {
-                        btnSoru.Text = dr20[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 21:
-                    btnU.BackColor = Color.Yellow;
-                    SqlCommand komut21 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut21.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr21 = komut21.ExecuteReader();
-                    while (dr21.Read())
-                    {
-                        btnSoru.Text = dr21[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 22:
-                    btnV.BackColor = Color.Yellow;
-                    SqlCommand komut22 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut22.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr22 = komut22.ExecuteReader();
-                    while (dr22.Read())
-                    {
-                        btnSoru.Text = dr22[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 23:
-                    btnY.BackColor = Color.Yellow;
-                    SqlCommand komut23 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut23.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr23 = komut23.ExecuteReader();
-                    while (dr23.Read())
-                    {
-                        btnSoru.Text = dr23[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
-                case 24:
-                    btnZ.BackColor = Color.Yellow;
-                    SqlCommand komut24 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
-                    komut24.Parameters.AddWithValue("@p1", soruno);
-                    SqlDataReader dr24 = komut24.ExecuteReader();
-                    while (dr24.Read())
-                    {
-                        btnSoru.Text = dr24[0].ToString();
-                    }
-                    bgl.baglanti().Close();
-                    break;
+                switch (soruno)
+                {
+                    case 1:
+                        btnA.BackColor = Color.Yellow;
+                        SqlCommand komut1 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut1.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr = komut1.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            btnSoru.Text = dr[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 2:
+                        btnB.BackColor = Color.Yellow;
+                        btnB.BackColor = Color.Yellow;
+                        SqlCommand komut2 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut2.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr2 = komut2.ExecuteReader();
+                        while (dr2.Read())
+                        {
+                            btnSoru.Text = dr2[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 3:
+                        btnC.BackColor = Color.Yellow;
+                        SqlCommand komut3 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut3.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr3 = komut3.ExecuteReader();
+                        while (dr3.Read())
+                        {
+                            btnSoru.Text = dr3[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 4:
+                        btnD.BackColor = Color.Yellow;
+                        SqlCommand komut4 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut4.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr4 = komut4.ExecuteReader();
+                        while (dr4.Read())
+                        {
+                            btnSoru.Text = dr4[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 5:
+                        btnE.BackColor = Color.Yellow;
+                        SqlCommand komut5 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut5.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr5 = komut5.ExecuteReader();
+                        while (dr5.Read())
+                        {
+                            btnSoru.Text = dr5[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 6:
+                        btnF.BackColor = Color.Yellow;
+                        SqlCommand komut6 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut6.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr6 = komut6.ExecuteReader();
+                        while (dr6.Read())
+                        {
+                            btnSoru.Text = dr6[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 7:
+                        btnG.BackColor = Color.Yellow;
+                        SqlCommand komut7 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut7.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr7 = komut7.ExecuteReader();
+                        while (dr7.Read())
+                        {
+                            btnSoru.Text = dr7[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 8:
+                        btnH.BackColor = Color.Yellow;
+                        SqlCommand komut8 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut8.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr8 = komut8.ExecuteReader();
+                        while (dr8.Read())
+                        {
+                            btnSoru.Text = dr8[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 9:
+                        btnI.BackColor = Color.Yellow;
+                        SqlCommand komut9 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut9.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr9 = komut9.ExecuteReader();
+                        while (dr9.Read())
+                        {
+                            btnSoru.Text = dr9[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 10:
+                        btnİ.BackColor = Color.Yellow;
+                        SqlCommand komut10 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut10.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr10 = komut10.ExecuteReader();
+                        while (dr10.Read())
+                        {
+                            btnSoru.Text = dr10[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 11:
+                        btnJ.BackColor = Color.Yellow;
+                        SqlCommand komut11 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut11.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr11 = komut11.ExecuteReader();
+                        while (dr11.Read())
+                        {
+                            btnSoru.Text = dr11[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 12:
+                        btnK.BackColor = Color.Yellow;
+                        SqlCommand komut12 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut12.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr12 = komut12.ExecuteReader();
+                        while (dr12.Read())
+                        {
+                            btnSoru.Text = dr12[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 13:
+                        btnL.BackColor = Color.Yellow;
+                        SqlCommand komut13 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut13.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr13 = komut13.ExecuteReader();
+                        while (dr13.Read())
+                        {
+                            btnSoru.Text = dr13[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 14:
+                        btnM.BackColor = Color.Yellow;
+                        SqlCommand komut14 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut14.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr14 = komut14.ExecuteReader();
+                        while (dr14.Read())
+                        {
+                            btnSoru.Text = dr14[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 15:
+                        btnN.BackColor = Color.Yellow;
+                        SqlCommand komut15 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut15.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr15 = komut15.ExecuteReader();
+                        while (dr15.Read())
+                        {
+                            btnSoru.Text = dr15[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 16:
+                        btnO.BackColor = Color.Yellow;
+                        SqlCommand komut16 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut16.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr16 = komut16.ExecuteReader();
+                        while (dr16.Read())
+                        {
+                            btnSoru.Text = dr16[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 17:
+                        btnP.BackColor = Color.Yellow;
+                        SqlCommand komut17 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut17.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr17 = komut17.ExecuteReader();
+                        while (dr17.Read())
+                        {
+                            btnSoru.Text = dr17[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 18:
+                        btnR.BackColor = Color.Yellow;
+                        SqlCommand komut18 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut18.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr18 = komut18.ExecuteReader();
+                        while (dr18.Read())
+                        {
+                            btnSoru.Text = dr18[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 19:
+                        btnS.BackColor = Color.Yellow;
+                        SqlCommand komut19 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut19.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr19 = komut19.ExecuteReader();
+                        while (dr19.Read())
+                        {
+                            btnSoru.Text = dr19[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 20:
+                        btnT.BackColor = Color.Yellow;
+                        SqlCommand komut20 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut20.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr20 = komut20.ExecuteReader();
+                        while (dr20.Read())
+                        {
+                            btnSoru.Text = dr20[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 21:
+                        btnU.BackColor = Color.Yellow;
+                        SqlCommand komut21 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut21.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr21 = komut21.ExecuteReader();
+                        while (dr21.Read())
+                        {
+                            btnSoru.Text = dr21[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 22:
+                        btnV.BackColor = Color.Yellow;
+                        SqlCommand komut22 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut22.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr22 = komut22.ExecuteReader();
+                        while (dr22.Read())
+                        {
+                            btnSoru.Text = dr22[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 23:
+                        btnY.BackColor = Color.Yellow;
+                        SqlCommand komut23 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut23.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr23 = komut23.ExecuteReader();
+                        while (dr23.Read())
+                        {
+                            btnSoru.Text = dr23[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
+                    case 24:
+                        btnZ.BackColor = Color.Yellow;
+                        SqlCommand komut24 = new SqlCommand("select soru from TblSoru where id=@p1", bgl.baglanti());
+                        komut24.Parameters.AddWithValue("@p1", soruno);
+                        SqlDataReader dr24 = komut24.ExecuteReader();
+                        while (dr24.Read())
+                        {
+                            btnSoru.Text = dr24[0].ToString();
+                        }
+                        bgl.baglanti().Close();
+                        break;
 
-                case 25:
-                    panelYeniden.Visible = true;
-                    lblDogru2.Text = dogru.ToString();
-                    lblYanlis2.Text = yanlis.ToString();
-                    lblBos2.Text = bos.ToString();
-                    break;
+                    case 25:
+                        panelYeniden.Visible = true;
+                        lblDogru2.Text = dogru.ToString();
+                        lblYanlis2.Text = yanlis.ToString();
+                        lblBos2.Text = bos.ToString();
+                        break;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Hata!","Hata!",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+
             }
         }
     }
-}
+

@@ -22,10 +22,17 @@ namespace PassaparolaOyunProje
 
         private void FrmSiralama_Load(object sender, EventArgs e)
         {
-            SqlDataAdapter da=new SqlDataAdapter("select dogru,yanlis,bos,ad from TblDereceler inner join TblYarismaci on TblDereceler.YarismaciId=TblYarismaci.id", bgl.baglanti());
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            dataGridView1.DataSource = dt;
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("select dogru,yanlis,bos,ad from TblDereceler inner join TblYarismaci on TblDereceler.YarismaciId=TblYarismaci.id", bgl.baglanti());
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dataGridView1.DataSource = dt;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Hata!", "Hata!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

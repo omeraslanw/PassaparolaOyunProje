@@ -23,22 +23,29 @@ namespace PassaparolaOyunProje
 
         private void btnGiris_Click_1(object sender, EventArgs e)
         {
-            SqlCommand komut = new SqlCommand("select ad,sifre from TblYarismaci where ad=@p1 and sifre=@p2", bgl.baglanti());
-            komut.Parameters.AddWithValue("@p1", txtAd.Text);
-            komut.Parameters.AddWithValue("@p2", txtSifre.Text);
-            SqlDataReader dr = komut.ExecuteReader();
-            if (dr.Read())
+            try
             {
-                this.Hide();
-                FrmYarisma frm = new FrmYarisma();
-                frm.yarismaci = txtAd.Text;
-                frm.Show();
+                SqlCommand komut = new SqlCommand("select ad,sifre from TblYarismaci where ad=@p1 and sifre=@p2", bgl.baglanti());
+                komut.Parameters.AddWithValue("@p1", txtAd.Text);
+                komut.Parameters.AddWithValue("@p2", txtSifre.Text);
+                SqlDataReader dr = komut.ExecuteReader();
+                if (dr.Read())
+                {
+                    this.Hide();
+                    FrmYarisma frm = new FrmYarisma();
+                    frm.yarismaci = txtAd.Text;
+                    frm.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Hatalı kullanıcı adı veya şifre", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                bgl.baglanti().Close();
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Hatalı kullanıcı adı veya şifre", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Lütfen girdiğiniz ad veya şifre bilgilerinin doğruluğundan emin olunuz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            bgl.baglanti().Close();
         }
 
         private void linkKaydol_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
